@@ -71,3 +71,28 @@ void muestraSecuencia(){
     delay(200);
   }
 }
+
+ int flag =0 
+
+  for(int i =0;i <nivelactal; i++){
+    flag =0;
+    while(flag==0){
+
+      if(digitalRead(ENTRADA_D)==LOW){
+        digitalWrite(SALIDA_D, HIGH);
+
+        tone(BUZZER,500);
+
+        delay(300);
+
+        noToner(BUZZER);
+
+        secuenciaUsuario[i]= SALIDA_D;
+
+        flag =1;
+
+        delay(200);
+
+        if(secuenciaUsuario[i]¡= secuencia[i]){
+
+          secuenciaError();
