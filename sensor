@@ -1,1 +1,35 @@
-code
+#define trig 7
+#define  echo 6
+#define  buzzer 12
+void setup(){
+
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  pinMode(buzzer, OUTPUT);
+}
+void loop(){
+
+
+  long duration,distance;
+
+
+  digitalWrite(trig,LOW);
+
+  delay(2);
+  digitalWrite(trig,HIGH);
+  delay(5);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo,HIGH);
+
+  distance = (duration/2)*0.0343;
+
+  if(distance < 10)
+  { tone(buzzer,1000);
+  delay(5000);
+  }
+  else
+  {
+    noTone(buzzer);
+  }
+}
+
