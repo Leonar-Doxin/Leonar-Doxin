@@ -1,27 +1,32 @@
-{
-  "version": 1,
-  "author": "Anonymous maker",
-  "editor": "wokwi",
-  "parts": [
-    { "type": "wokwi-arduino-uno", "id": "uno", "top": 115.8, "left": 114.6, "attrs": {} },
-    { "type": "wokwi-servo", "id": "servo1", "top": -88.4, "left": 451.2, "attrs": {} },
-    {
-      "type": "wokwi-hc-sr04",
-      "id": "ultrasonic1",
-      "top": -36.9,
-      "left": -71.3,
-      "rotate": 270,
-      "attrs": {}
-    }
-  ],
-  "connections": [
-    [ "servo1:V+", "uno:5V", "green", [ "h-57.6", "v364.9", "h-105.6" ] ],
-    [ "ultrasonic1:VCC", "uno:5V", "red", [ "h25.2", "v-100.6", "h316.8", "v403.2", "h-124.8" ] ],
-    [ "ultrasonic1:TRIG", "uno:2", "green", [ "h0" ] ],
-    [ "ultrasonic1:ECHO", "uno:3", "green", [ "h0" ] ],
-    [ "servo1:PWM", "uno:4", "green", [ "h0" ] ],
-    [ "ultrasonic1:GND", "uno:GND.1", "black", [ "h0" ] ],
-    [ "servo1:GND", "uno:GND.1", "black", [ "h-220.8", "v163.2" ] ]
-  ],
-  "dependencies": {}
+#include <Servo.h>
+Servo ioe;
+int trig = 2;
+int echo = 3;
+int tiempo;
+int distancia;
+
+void setup(){
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+  ioe.attach(4);
+
+
+}
+
+void loop(){
+  digitalWrite(trig,HIGH);
+  delay(500);
+  digitalWrite(trig,LOW);
+  tiempo=pulseIn(echo,HIGH);
+  distancia=tiempo/58.2;
+  delay(500);
+
+  if(distancia<=20)
+  {
+    ioe.write(180);
+  }
+  if(distancia>20)
+  {
+    ioe.write(0);
+  }
 }
